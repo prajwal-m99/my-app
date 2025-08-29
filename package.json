@@ -1,0 +1,26 @@
+{
+  "name": "food_delivery",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/prajwal-m99/my-app#readme",
+  "bugs": {
+    "url": "https://github.com/prajwal-m99/my-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prajwal-m99/my-app.git"
+  },
+  "license": "ISC",
+  "author": "Prajwal",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "dependencies": {
+    "babel": "^5.8.38",
+    "parcel": "^2.15.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
