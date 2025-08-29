@@ -1,31 +1,50 @@
-import React from "react";
-import { BACKEND_DATA } from "../utils/constants"
+import React, { useEffect, useState } from "react";
 import RestCard from "./RestCard";
-
+import { BACKEND_DATA } from "../utils/constants";
 
 const Body = () => {
-    return (
-        <div className="body">
-            <div className="search">
-                <input type="text" className="search-box" placeholder="Search for restaurants and food" />
-                <button className="search-btn">Search</button>
-            </div>
-            <div className="filter">
-                <button className="filter-btn" onClick={() => { }}>Top Rated Restuarants</button>
-            </div>
-            <div className="rest-container">
-                {fetchData.map((restaurant) => (
-                    <restuarantCard key={restaurant.data.id} resData={restaurant} />
-                ))}
-            </div>
-        </div>
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
+  // Fetch restaurants on mount
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await fetch(BACKEND_DATA);
+      const json = await data.json();
+
+      const restaurants =
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+
+      setListOfRestaurants(restaurants);
+      setFilteredRestaurants(restaurants);
+    } catch (error) {
+      console.error("Error fetching restaurant data:", error);
+    }
+  };
+
+  // 🔍 Search filter
+  const handleSearch = () => {
+    const filtered = listOfRestaurants.filter((res) =>
+      res.info.name.toLowerCase().includes(searchText.toLowerCase())
     );
-}
+    setFilteredRestaurants(filtered);
+  };
 
-const fetchData = async () => {
-  }
+  // ⭐ New: Top Rated filter (example: rating > 4.3)
+  const handleTopRated = () => {
+    const filtered = listOfRestaurants.filter(
+      (res) => res.info.avgRating && res.info.avgRating > 4.3
+    );
+    setFilteredRestaurants(filtered);
+  };
 
-
-
+ 
+};
 
 export default Body;

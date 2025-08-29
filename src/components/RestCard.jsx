@@ -1,18 +1,32 @@
 import React from "react";
-import {BACKEND_DATA} from "../utils/constants"
+import { CDN_URL } from "../utils/constants";
 
+const RestCard = ({ resData }) => {
+  if (!resData) return null; // ✅ Prevents crash on missing data
 
-const RestCard =()=>{
-    return(
-        <div className="rest-card">
-            <img className="rest-image" alt="restaurant" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-k6vXMvaVLiSimKzZAGbXSXrLbmeqDIfuRHUuLrOfKEL-Bv1CKU_GYLuPOtMYVZu7FM&usqp=CAU"/>
-            <h3>Meghana Foods</h3>
-            <h4>South Indian</h4>
-            <h4>4.5</h4>
-        </div>
-    );
-}
+  const {
+    cloudinaryImageId,
+    name,
+    avgRating,
+    cuisines,
+    costForTwo,
+    sla,
+  } = resData;
 
-
+  return (
+    <div data-testid="resCard" className="rest-card">
+      <img
+        className="rest-image"
+        alt={name}
+        src={CDN_URL + cloudinaryImageId}
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines?.join(", ")}</h4>
+      <h4>{avgRating} ⭐</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{sla?.deliveryTime} mins</h4>
+    </div>
+  );
+};
 
 export default RestCard;
