@@ -36,7 +36,7 @@ const Body = () => {
     setFilteredRestaurants(filtered);
   };
 
-  // ⭐ New: Top Rated filter (example: rating > 4.3)
+  // ⭐ Top Rated filter (example: rating > 4.3)
   const handleTopRated = () => {
     const filtered = listOfRestaurants.filter(
       (res) => res.info.avgRating && res.info.avgRating > 4.3
@@ -44,7 +44,32 @@ const Body = () => {
     setFilteredRestaurants(filtered);
   };
 
- 
+  return (
+    <div className="body">
+      {/* Search and Filter Section */}
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search restaurants..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleTopRated}>Top Rated</button>
+      </div>
+
+      {/* Restaurant Cards */}
+      <div className="restaurant-list">
+        {filteredRestaurants.length > 0 ? (
+          filteredRestaurants.map((restaurant) => (
+            <RestCard key={restaurant.info.id} resData={restaurant.info} />
+          ))
+        ) : (
+          <p>No restaurants found 🚫</p>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Body;
