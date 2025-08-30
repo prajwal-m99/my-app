@@ -214,3 +214,26 @@
   }
 }
 /* Responsive Design */
+
+
+/* Login buttton */
+.login-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.02s;
+}
+
+.login-btn:hover {
+  background: #e65c00;
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}

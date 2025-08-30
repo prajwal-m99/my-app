@@ -49,6 +49,11 @@ const Body = () => {
     setFilteredRestaurants(filtered);
   };
 
+  // 👇 Render
+  if (loading) {
+    return <Shimmer />; // ✅ Shimmer covers full page until API data loads
+  }
+
   return (
     <div className="body">
       {/* Search and Filter Section */}
@@ -70,9 +75,7 @@ const Body = () => {
 
       {/* Restaurant Cards */}
       <div className="restaurant-list">
-        {loading ? (
-          <Shimmer /> // ✅ show shimmer while loading
-        ) : filteredRestaurants.length > 0 ? (
+        {filteredRestaurants.length > 0 ? (
           filteredRestaurants.map((restaurant) => (
             <RestCard key={restaurant.info.id} resData={restaurant.info} />
           ))
