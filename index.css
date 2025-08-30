@@ -1,163 +1,212 @@
-/* Reset a bit */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* App container */
+body {
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+/* ================= APP CONTAINER ================= */
 .app {
   width: 100%;
   min-height: 100vh;
-  background-color: #f4f6f8;
 }
 
 /* ================= HEADER ================= */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #89c7e6;
-  border-radius: 8px;
-  border: 1px solid black;
-  padding: 10px 20px; /* ✅ breathing space */
-  margin-bottom: 20px;
+  justify-content: space-between; /* logo left, nav right */
+  padding: 20px 40px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
 }
 
 /* Logo */
 .logo img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.7);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
 }
 
-/* Header text */
+.logo img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* Header text (centered) */
+.headerText {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .headerText h1 {
-  font-size: 28px;
-  color: #333;
+  font-size: 42px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8),
+               2px 2px 12px rgba(0,0,0,0.3);
+  animation: glowText 2s ease-in-out infinite alternate;
+}
+
+.headerText h1::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #fff;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+@keyframes glowText {
+  0% { text-shadow: 0 0 8px rgba(255,255,255,0.8), 2px 2px 12px rgba(0,0,0,0.3); }
+  100% { text-shadow: 0 0 16px rgba(255,255,255,1), 4px 4px 16px rgba(0,0,0,0.35); }
 }
 
 /* Navigation */
 .nav-items ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 30px;
 }
 
 .nav-items li {
   cursor: pointer;
-  font-weight: 600;
-  transition: color 0.2s, transform 0.2s;
-  padding: 5px 10px;
+  font-weight: 700;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
 
 .nav-items li:hover {
-  color: #ff6600;
-  transform: scale(1.05);
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* ================= BODY ================= */
-.body {
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center; /* ✅ centers all cards */
+/* Login button */
+.login-btn {
+  padding: 10px 18px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-/* ================= SEARCH ================= */
-/* ================= SEARCH ================= */
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+  background: linear-gradient(135deg, #ff8c00, #ffd700);
+}
+
+/* ================= SEARCH & FILTER ================= */
 .search {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;           /* ✅ equal space between all items */
-  margin-bottom: 20px;
+  gap: 12px;
+  margin: 30px 0 20px;
 }
 
 .search-box {
-  padding: 8px 12px;
+  padding: 10px 14px;
   font-size: 16px;
-  width: 250px;
-  border-radius: 6px;
+  width: 260px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-box:focus {
+  border-color: #ff6600;
+}
+
+.search-btn, .filter-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .search-btn {
-  padding: 8px 16px;
-  background-color: #ff6600;
+  background: linear-gradient(90deg, #ff6600, #ff9900);
   border: none;
-  border-radius: 6px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
+  color: #fff;
 }
 
 .search-btn:hover {
-  background-color: #e65c00;
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
-/* Top Rated button */
 .filter-btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
   background: #fff;
-  cursor: pointer;
-  transition: background 0.2s;
+  border: 1px solid #ccc;
 }
 
 .filter-btn:hover {
   background: #f0f0f0;
 }
 
-/* Top Rated button */
-.filter-btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-  transition: background 0.2s;
+/* ================= BODY & RESTAURANT CARDS ================= */
+.body, .restaurant-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 20px;
 }
 
-.filter-btn:hover {
-  background: #f0f0f0;
-}
-
-
-/* ================= RESTAURANT CARDS ================= */
 .rest-card {
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 10px;
-  width: 220px;
-  text-align: center;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  width: 240px;
   background-color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .rest-card:hover {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 18px rgba(0,0,0,0.2);
 }
 
 .rest-image {
   width: 100%;
-  height: 140px;
-  border-radius: 6px;
+  height: 150px;
+  border-radius: 10px;
   object-fit: cover;
   margin-bottom: 10px;
 }
 
 .rest-card h3 {
   margin: 5px 0;
-  color: #333;
+  color: #222;
 }
 
 .rest-card h4 {
@@ -166,23 +215,7 @@
   font-weight: 500;
 }
 
-
-.footer{
-    text-align: center;
-    padding: 10px;
-    background-color: #89c7e6;
-    border-top: 1px solid black;
-    margin-top: 20px;
-}
-
-
-.restaurant-list{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center; /* ✅ centers all cards */
-}
-
+/* ================= SHIMMER / LOADING ================= */
 .shimmer-container {
   display: flex;
   flex-wrap: wrap;
@@ -191,7 +224,7 @@
 }
 
 .shimmer-card {
-  width: 250px;
+  width: 240px;
   height: 180px;
   border-radius: 12px;
   background: linear-gradient(
@@ -204,36 +237,50 @@
   animation: shimmer 1.5s infinite linear;
 }
 
-/* Shimmer keyframes */
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
-/* Responsive Design */
 
-
-/* Login buttton */
-.login-btn {
-  margin-top: 8px;
-  width: 100%;
-  padding: 10px 14px;
-  background: #ff6600;
+/* ================= FOOTER ================= */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff6600, #ff9900);
   color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.02s;
+  border-top: 2px solid rgba(0,0,0,0.1);
+  margin-top: 40px;
+  border-radius: 16px 16px 0 0;
 }
 
-.login-btn:hover {
-  background: #e65c00;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .rest-card, .shimmer-card {
+    width: 220px;
+  }
 }
 
-.login-btn:active {
-  transform: translateY(1px);
+@media (max-width: 768px) {
+  .rest-card, .shimmer-card {
+    width: 45%; /* 2 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .rest-card, .shimmer-card {
+    width: 90%; /* 1 card per row */
+  }
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  .headerText h1 {
+    font-size: 32px;
+  }
+
+  .logo img {
+    width: 70px;
+    height: 70px;
+  }
 }
