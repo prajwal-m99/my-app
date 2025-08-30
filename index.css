@@ -67,11 +67,14 @@
   justify-content: center; /* ✅ centers all cards */
 }
 
-/* Search box */
+/* ================= SEARCH ================= */
+/* ================= SEARCH ================= */
 .search {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 12px;           /* ✅ equal space between all items */
   margin-bottom: 20px;
 }
 
@@ -85,7 +88,6 @@
 
 .search-btn {
   padding: 8px 16px;
-  margin-left: 10px;
   background-color: #ff6600;
   border: none;
   border-radius: 6px;
@@ -98,6 +100,35 @@
 .search-btn:hover {
   background-color: #e65c00;
 }
+
+/* Top Rated button */
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f0f0f0;
+}
+
+/* Top Rated button */
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f0f0f0;
+}
+
 
 /* ================= RESTAURANT CARDS ================= */
 .rest-card {
@@ -151,3 +182,35 @@
     gap: 20px;
     justify-content: center; /* ✅ centers all cards */
 }
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+}
+
+.shimmer-card {
+  width: 250px;
+  height: 180px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Shimmer keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+/* Responsive Design */

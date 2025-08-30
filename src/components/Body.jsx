@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import RestCard from "./RestCard";
 import { BACKEND_DATA } from "../utils/constants";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // Fetch restaurants on mount
   useEffect(() => {
@@ -14,6 +16,7 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const data = await fetch(BACKEND_DATA);
       const json = await data.json();
 
@@ -25,6 +28,8 @@ const Body = () => {
       setFilteredRestaurants(restaurants);
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,20 +52,27 @@ const Body = () => {
   return (
     <div className="body">
       {/* Search and Filter Section */}
-      <div className="controls">
+      <div className="search">
         <input
           type="text"
+          className="search-box"
           placeholder="Search restaurants..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
-        <button onClick={handleTopRated}>Top Rated</button>
+        <button className="search-btn" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="filter-btn" onClick={handleTopRated}>
+          Top Rated
+        </button>
       </div>
 
       {/* Restaurant Cards */}
       <div className="restaurant-list">
-        {filteredRestaurants.length > 0 ? (
+        {loading ? (
+          <Shimmer /> // ✅ show shimmer while loading
+        ) : filteredRestaurants.length > 0 ? (
           filteredRestaurants.map((restaurant) => (
             <RestCard key={restaurant.info.id} resData={restaurant.info} />
           ))
