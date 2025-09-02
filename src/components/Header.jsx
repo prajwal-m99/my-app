@@ -1,5 +1,6 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Header = () => {
@@ -7,6 +8,8 @@ const Header = () => {
 
 
 const [btnName, setBtnName] = useState("Login");
+const navigate = useNavigate();
+
 
 
     return (
@@ -26,10 +29,10 @@ const [btnName, setBtnName] = useState("Login");
 
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
+                    <li onClick={()=> navigate("/")}>Home</li>
+                    <li onClick={() => navigate("/about")}>About Us</li>
+                    <li onClick={() => navigate("/contact")}>Contact Us</li>
+                    <li onClick={()=> navigate("/cart")}>Cart</li>
                     <button className="login-btn" onClick={()=>{
                         setBtnName(btnName==="Login"?"Logout":"Login");
                     }}>{btnName}</button>
