@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MENU_API,CDN_URL } from "../utils/constants";
+import { MENU_API, CDN_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
-
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -32,6 +31,7 @@ const RestaurantMenu = () => {
           items.push(item.card.info);
         });
       });
+
       setMenuItems(items);
       setFilteredItems(items); // initialize filtered items
     } catch (error) {
@@ -41,17 +41,13 @@ const RestaurantMenu = () => {
 
   if (!restaurant) return <Shimmer />;
 
-  const filterVeg = () => {
-    setFilteredItems(menuItems.filter((item) => item.isVeg === 1));
-  };
+  const filterVeg = () =>
+    setFilteredItems(menuItems.filter((item) => item.itemAttribute?.vegClassifier === "VEG"));
 
-  const filterNonVeg = () => {
-    setFilteredItems(menuItems.filter((item) => item.isVeg === 0));
-  };
+  const filterNonVeg = () =>
+    setFilteredItems(menuItems.filter((item) => item.itemAttribute?.vegClassifier === "NONVEG"));
 
-  const showAll = () => {
-    setFilteredItems(menuItems);
-  };
+  const showAll = () => setFilteredItems(menuItems);
 
   return (
     <div className="restaurant-menu">
@@ -70,25 +66,24 @@ const RestaurantMenu = () => {
 
       <h2>Menu Items</h2>
       <div className="menu-grid">
-       {filteredItems.map((item, index) => (
-  <div className="menu-card" key={`${item.id}-${index}`}>
-    {item.imageId && (
-      <img
-        src={`${CDN_URL}/${item.imageId}`}
-        alt={item.name}
-        className="menu-image"
-      />
-    )}
-    <div className="menu-details">
-      <h3>
-        {item.name} {item.isVeg ? "🌱" : "🍖"}
-      </h3>
-      <p>{item.description}</p>
-      <p>Price: ₹{item.defaultPrice / 100}</p>
-    </div>
-  </div>
-))}
-
+        {filteredItems.map((item, index) => (
+          <div className="menu-card" key={`${item.id}-${index}`}>
+            {item.imageId && (
+              <img
+                src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${item.imageId}`}
+                alt={item.name}
+                className="menu-image"
+              />
+            )}
+            <div className="menu-details">
+              <h3>
+                {item.name} {item.itemAttribute?.vegClassifier === "VEG" ? "🌱" : "🍖"}
+              </h3>
+              <p>{item.description}</p>
+              <p>Price: ₹{item.defaultPrice / 100}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
