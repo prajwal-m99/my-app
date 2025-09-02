@@ -182,6 +182,7 @@ body {
 }
 
 .rest-card {
+
   width: 240px;
   background-color: #fff;
   border-radius: 12px;
@@ -192,6 +193,7 @@ body {
 }
 
 .rest-card:hover {
+ cursor: pointer;
   transform: translateY(-5px);
   box-shadow: 4px 4px 18px rgba(0,0,0,0.2);
 }
@@ -283,4 +285,77 @@ body {
     width: 70px;
     height: 70px;
   }
+}
+
+.restaurant-menu {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.restaurant-info {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.menu-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+}
+
+.menu-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.menu-details {
+  padding: 10px;
+}
+
+.menu-details h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.menu-details p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff6f61;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-buttons button:hover {
+  background-color: #ff3b2e;
 }

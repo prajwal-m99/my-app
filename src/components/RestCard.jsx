@@ -1,25 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import { CDN_URL } from "../utils/constants";
 
 const RestCard = ({ resData }) => {
-  if (!resData) return null; // ✅ Prevents crash on missing data
+  const navigate = useNavigate(); // ✅ Initialize navigate
 
-  const {
-    cloudinaryImageId,
-    name,
-    avgRating,
-    cuisines,
-    costForTwo,
-    sla,
-  } = resData;
+  if (!resData) return null; // Prevent crash on missing data
+
+  const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, sla, id } = resData;
 
   return (
-    <div data-testid="resCard" className="rest-card">
-      <img
-        className="rest-image"
-        alt={name}
-        src={CDN_URL + cloudinaryImageId}
-      />
+    <div
+      data-testid="resCard"
+      className="rest-card"
+      onClick={() => navigate("/restaurant/" + id)} // ✅ Works now
+    >
+      <img className="rest-image" alt={name} src={CDN_URL + cloudinaryImageId} />
       <h3>{name}</h3>
       <h4>{cuisines?.join(", ")}</h4>
       <h4>{avgRating} ⭐</h4>
